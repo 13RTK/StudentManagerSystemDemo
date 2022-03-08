@@ -19,4 +19,12 @@ public class StudentUtil {
     public static Student getStudentById(int id) {
         return StudentUtil.studentMapper.getStudentById(id);
     }
+
+    public static int insertStudent(String name, String gender) {
+        return StudentUtil.studentMapper.insertStudent(name, gender);
+    }
+
+    public static Student deleteStudentId(int id) {
+        return StudentUtil.studentMapper.deleteStudentId(id);
+    }
 }
