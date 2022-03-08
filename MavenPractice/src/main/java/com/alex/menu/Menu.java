@@ -1,6 +1,7 @@
 package com.alex.menu;
 
 import com.alex.entity.Student;
+import com.alex.utils.EditLogger;
 import com.alex.utils.StudentUtil;
 import lombok.SneakyThrows;
 
@@ -21,6 +22,8 @@ public class Menu {
         System.out.println("1: Check all student\n" +
                 "2: Query student by ID\n" +
                 "3: Query student by name\n" +
+                "4: Insert student\n" +
+                "5: Delete student\n" +
                 "0: Exit");
 
         isDigit(reader.readLine());
@@ -52,6 +55,40 @@ public class Menu {
                 studentByName.forEach(System.out::println);
                 isContinue();
                 return;
+
+            case 4:
+                String studentName;
+                String studentGender;
+
+                System.out.println("Please enter the student name:");
+                studentName = reader.readLine();
+
+                System.out.println("Please enter the student gender:");
+                studentGender = reader.readLine();
+
+                int i = StudentUtil.insertStudent(studentName, studentGender);
+                if (i > 0) {
+                    System.out.println("Insert done!");
+                    EditLogger.insertLogPrint("Insert log: " + studentName + " " + studentGender);
+                } else {
+                    System.out.println("Insert failed");
+                }
+                isContinue();
+                return;
+
+            case 5:
+                System.out.println("Please enter the student id you want to delete: ");
+                int deleteStudentId = Integer.parseInt(reader.readLine());
+                Student deleteStudentId1 = StudentUtil.deleteStudentId(deleteStudentId);
+                if (deleteStudentId1 == null) {
+                    System.out.println("Delete done!");
+                    EditLogger.insertLogPrint("Delete student: " + StudentUtil.getStudentById(deleteStudentId));
+                } else {
+                    System.out.println("Delete failed");
+                }
+                isContinue();
+                return;
+
 
             case 0:
                 System.out.println("Are you sure to exit?(Y/N)");
@@ -108,7 +145,7 @@ public class Menu {
             curOption = Integer.parseInt(repeatInput);
         }
 
-        if (curOption <= 3 && curOption >= 0) {
+        if (curOption <= 5 && curOption >= 0) {
             Menu.curOption = curOption;
         } else {
             System.out.println("Illegal input, please check your input and enter again: ");
@@ -145,6 +182,8 @@ public class Menu {
             System.out.println("1: Check all student\n" +
                     "2: Query student by ID\n" +
                     "3: Query student by name\n" +
+                    "4: Insert student\n" +
+                    "5: Delete student\n" +
                     "0: Exit");
         } else {
             System.out.println("Illegal enter, please enter again!");
