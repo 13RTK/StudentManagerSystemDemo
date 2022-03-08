@@ -1,2 +1,2 @@
 # StudentManagerSystemDemo
-Use Mybatis + Maven + Junit + Lombok
+Use Mybatis + Maven + Junit + Lombok + MySQL
